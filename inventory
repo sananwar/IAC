@@ -1,0 +1,12 @@
+[webserver]
+web1 ansible_host=192.168.1.48 ansible_user=root ansible_ssh_pass=Welkom01!
+
+[dbserver]
+db1 ansible_host=192.168.1.47 ansible_user=root ansible_ssh_pass=Welkom01!
+
+[webserver:vars]
+packages=apache2,php,php-mysql
+
+[dbserver:vars]
+mysql_user=dbuser
+mysql_password=dbpassword

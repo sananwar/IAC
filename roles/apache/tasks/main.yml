@@ -1,0 +1,21 @@
+---
+- name: Install webserver packages
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  notify: restart apache
+
+- name: Copy VirtualHost configuration for site1
+  ansible.builtin.copy:
+    src: "files/site1.conf"
+    dest: "/etc/apache2/sites-available/site1.conf"
+  notify: restart apache
+
+- name: Enable site1
+  command: a2ensite site1.conf
+  notify: restart apache
+
+- name: Disable default site
+  command: a2dissite 000-default.conf
+  notify: restart apache
